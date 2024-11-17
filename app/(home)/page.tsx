@@ -10,8 +10,7 @@ async function getMovies() {
   await new Promise((resolve) => {
     setTimeout(resolve, 5000);
   });
-  const response = await fetch(URL);
-  const json = await response.json();
+  const json = await fetch(URL).then((response) => response.json());
   return json;
 }
 
