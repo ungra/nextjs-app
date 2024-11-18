@@ -5,7 +5,7 @@ const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 export async function getMovie(id: string) {
   //   await new Promise((resolve) => setTimeout(resolve, 5000));
   try {
-    const response = await fetch(`${URL}/${id}`);
+    const response = await fetch(`${URL}/${id}`, { cache: "no-cache" });
     if (!response.ok) {
       throw new Error(`Failed to fetch movie data for ID ${id}`);
     }
