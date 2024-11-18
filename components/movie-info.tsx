@@ -1,10 +1,13 @@
-import { URL } from "../app/(home)/page";
 import styles from "../styles/movie-info.module.css";
 
+const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+
 export async function getMovie(id: string) {
-  console.log(`Fetching movies: ${Date.now()}`);
   //   await new Promise((resolve) => setTimeout(resolve, 5000));
   const response = await fetch(`${URL}/${id}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch movie data for ID ${id}`);
+  }
   return response.json();
 }
 

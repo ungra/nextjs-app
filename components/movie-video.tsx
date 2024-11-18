@@ -1,5 +1,6 @@
-import { URL } from "../app/(home)/page";
 import styles from "../styles/movie-videos.module.css";
+
+const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getVideo(id: string) {
   console.log(`Fetching videos: ${Date.now()}`);

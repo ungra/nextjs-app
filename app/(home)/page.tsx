@@ -5,14 +5,23 @@ export const metadata = {
   title: "Home",
 };
 
-export const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
+const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovies() {
   // await new Promise((resolve) => {
   //   setTimeout(resolve, 1000);
   // });
-  const json = await fetch(URL).then((response) => response.json());
-  return json;
+  try {
+    const response = await fetch(URL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch movies: ${response.status}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
 }
 
 export default async function HomePage() {
