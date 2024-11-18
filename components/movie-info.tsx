@@ -13,12 +13,15 @@ export async function getMovie(id: string) {
     return json;
   } catch (e) {
     console.log(e);
-    return [];
+    return null;
   }
 }
 
 export default async function MovieInfo({ id }: { id: string }) {
   const movie = await getMovie(id);
+  if (!movie) {
+    return <div>Error Loading movie info</div>;
+  }
   return (
     <div className={styles.container}>
       <img
