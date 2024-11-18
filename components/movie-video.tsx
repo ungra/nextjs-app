@@ -3,10 +3,19 @@ import styles from "../styles/movie-videos.module.css";
 const URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getVideo(id: string) {
-  console.log(`Fetching videos: ${Date.now()}`);
+  // console.log(`Fetching videos: ${Date.now()}`);
   //   await new Promise((resolve) => setTimeout(resolve, 5000));
-  const response = await fetch(`${URL}/${id}/videos`);
-  return response.json();
+  try {
+    const response = await fetch(`${URL}/${id}/videos`);
+    if (!response.ok) {
+      throw new Error(`Fetch to the video data for ID ${id}`);
+    }
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
 }
 
 export default async function MovieVideos({ id }: { id: string }) {
